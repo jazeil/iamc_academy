@@ -20,6 +20,39 @@ if (menuButton && navigation) {
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
+
+// Reveal selected section content once as it enters the viewport.
+const revealMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (!revealMotion.matches && 'IntersectionObserver' in window) {
+  const revealTargets = document.querySelectorAll([
+    '.intro-grid > div', '.stats-row > div',
+    '.purpose-grid > *', '.advantages .section-top > *', '.advantage-grid article',
+    '.method-heading', '.method-list article',
+    '.program-details .section-top > *', '.phase-grid article', '.placement-note',
+    '.programs .section-top > *', '.program-card', '.short-grid > *',
+    '.cruise-art', '.cruise-copy', '.pathways .section-top > *', '.pathway-grid article', '.career-logos',
+    '.iamc-gallery .section-top > *', '.gallery-grid figure',
+    '.experience-grid > *', '.fee-grid > *', '.fee-cards article',
+    '.contact-info > *', '.enquiry-form'
+  ].join(','));
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -28px 0px' });
+
+  revealTargets.forEach((element) => {
+    const siblingIndex = [...element.parentElement.children].indexOf(element);
+    element.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 3) * 80}ms`);
+    element.classList.add('scroll-reveal');
+    revealObserver.observe(element);
+  });
+}
+
 const channelPopup = document.querySelector('#whatsapp-channel-popup');
 if (channelPopup) {
   const closeChannelPopup = channelPopup.querySelector('.channel-popover-close');
