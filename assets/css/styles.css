@@ -190,3 +190,14 @@
 .contact-map iframe{display:block;width:100%;height:230px;border:0}
 @media(max-width:900px){.contact-map iframe{height:220px}}
 @media(max-width:640px){.contact-map{margin-top:16px}.contact-map iframe{height:205px}}
+
+
+/* Footer logo centered; tagline aligned left */
+.footer-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);align-items:center;gap:16px}
+.footer-main>.footer-brand{grid-column:2;grid-row:1;justify-self:center}
+.footer-main>p{grid-column:1;grid-row:1;justify-self:start;margin:0}
+.footer-main>.back-top{grid-column:3;grid-row:1;justify-self:end;margin-left:0}
+@media(max-width:640px){.footer-main{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto auto;gap:12px 8px}.footer-main>.footer-brand{grid-column:2;grid-row:1;width:min(165px,42vw)}.footer-main>p{grid-column:1/3;grid-row:2;width:auto;max-width:100%;margin:0;order:0}.footer-main>.back-top{grid-column:3;grid-row:2;margin-left:0;justify-self:end}}
+
+/* Mobile footer order and header logo scale */
+@media(max-width:640px){.footer-bottom{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto auto}.footer-bottom>span:first-child{grid-column:1/-1;grid-row:1}.footer-bottom>.site-credit{grid-column:1;grid-row:2;justify-self:start}.footer-bottom>span:last-of-type{grid-column:3;grid-row:2;justify-self:end}}
